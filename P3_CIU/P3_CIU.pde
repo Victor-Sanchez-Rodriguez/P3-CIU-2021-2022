@@ -9,7 +9,7 @@ boolean has_moon, simulation_started, up_pressed, down_pressed;
 
 void setup(){
   size(1920, 1080, P3D);
-  url = "sun.png";
+  url = "sun.jpg";
   distance = 150;
   x=0;
   y=0;
@@ -42,7 +42,7 @@ void draw(){
 
 void create_planets(){
   planets = new ArrayList<Planet>();
-  url="planet.png";
+  url="planet.jpg";
   if(random(0,80)>45){
     has_moon=true;
   }else{
@@ -176,15 +176,17 @@ class Planet{
     this.degrees = 0;
     this.speed = random(0.1, 1.0);
     this.name = name;
-    this.planet_shape = createShape(SPHERE, this.radius);
     this.planet_texture = loadImage(url);
+    beginShape();
+    this.planet_shape = createShape(SPHERE, this.radius);
+    this.planet_shape.setStroke(255);
     this.planet_shape.setTexture(this.planet_texture);
-    this.planet_shape.setStroke(0);
+    endShape(CLOSE);
     this.has_moon = has_moon;
     if(has_moon){
-      url="moon.png";
+      url="moon.jpg";
       moon = new Planet(radius + random(25,40),y,z,random(10,20),url,"Luna",false);
-      url="planet.png";
+      url="planet.jpg";
     }else{
       this.moon=null;
     }
